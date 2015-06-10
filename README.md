@@ -25,6 +25,16 @@ Instell dependencies:
 sudo apt-get install postgresql postgresql-contrib libpq-dev
 
 # create database for your website
+sudo su - postgres
+psql
+
+# > CREATE DATABASE `myproject` DEFAULT CHARACTER SET utf8;
+# > CREATE USER myprojectuser WITH PASSWORD 'password';
+# > GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;
+# > \q
+
+# return to original user
+exit
 ```
 
 ```
@@ -39,6 +49,7 @@ mysql -u root -p
 # > CREATE USER myprojectuser@localhost IDENTIFIED BY 'password';
 # > GRANT ALL PRIVILEGES ON myproject.* TO myprojectuser@localhost;
 # > FLUSH PRIVILEGES;
+# > \q
 ```
 
 #### Use virtualenv
@@ -53,7 +64,7 @@ nano ~/.bashrc
 
 # add this line to end of file:
 # source /usr/local/bin/virtualenvwrapper.sh
-# save and close file (Control + X then Y)
+# save and close file (Ctrl + X then Y)
 
 # apply changes to use autocomplitions
 source ~/.bashrc
@@ -94,10 +105,68 @@ chmod +x manage.py
 ./manage.py collectstatic
 ```
 
+Test django project in work. Run `./manage.py runserver 0.0.0.0:8000` and open your website `http://ip-address:8000`
+
 
 ### Setup gunicorn and nginx
 
-Read: [How To Set Up Django with Postgres, Nginx, and Gunicorn on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-14-04) and [How To Add and Delete Users on an Ubuntu 14.04 VPS](https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-an-ubuntu-14-04-vps)
+Run website to be served via gunicorn:
+
+```
+cd ~/myproject
+gunicorn --bind 0.0.0.0:8000 myproject.wsgi:application
+```
+
+Visit your website `http://ip-address:8000` to test it in work. After this press `Ctrl + X` to exit from gunicorn session. Then run `deactivate` to exit from project virtualenv.
+
+Edit file `sudo nano /etc/init/gunicorn.conf` and paste this content ()replace `projectname` and `user` to correct values):
+```
+description "Gunicorn application server handling projectname"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+setuid user
+setgid www-data
+chdir /home/user/projectname
+
+exec /home/user/.virtualenvs/projectname/bin/gunicorn --workers 3 --bind unix:/home/user/projectname/projectname.sock projectname.wsgi:application
+```
+
+Start gunicorn `sudo service gunicorn start`.
+
+#### Configure Nginx to Proxy Pass to Gunicorn
+
+Paste content to this file `sudo nano /etc/nginx/sites-available/projectname`:
+```
+server {
+    listen 80;
+    server_name server_domain_or_IP;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/user/projectname;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/user/projectname/projectname.sock;
+    }
+}
+```
+
+Next steps:
+ * save this file
+ * enable this new website with command: `sudo ln -s /etc/nginx/sites-available/projectname /etc/nginx/sites-enabled`
+ * test that nginx configured without errors: `sudo nginx -t`
+ * restart nginx: `sudo service nginx restart`
+ * visit your website
+
+
+Read:
+ * [How To Set Up Django with Postgres, Nginx, and Gunicorn on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-14-04)
+ * [How To Add and Delete Users on an Ubuntu 14.04 VPS](https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-an-ubuntu-14-04-vps)
 
 
 ### Send email with POSTFIX
