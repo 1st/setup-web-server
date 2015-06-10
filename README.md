@@ -96,9 +96,10 @@ Edit 'local_settings.py' of your django project:
  * be sure that your `settings.py` include `local_settings.py`
 
 Make migrations:
-```
+```shell
 chmod +x manage.py
-# next few lines can be replaced to restore database from dump
+
+# you don't need to run these commands if you restored database from dump
 ./manage.py makemigrations
 ./manage.py migrate
 ./manage.py createsuperuser
