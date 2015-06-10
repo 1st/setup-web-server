@@ -18,7 +18,7 @@ On server (Ubuntu):
 
 #### Install database
 
-```
+```shell
 # Postgres
 sudo apt-get install postgresql postgresql-contrib libpq-dev
 
@@ -35,7 +35,7 @@ psql
 exit
 ```
 
-```
+```shell
 # MySQL
 sudo apt-get install mysql-server libmysqlclient-dev
 sudo mysql_install_db && sudo mysql_secure_installation
@@ -58,7 +58,7 @@ This allow you to work with multiple projects on a single server. You can instal
 
 Install python virtualenv:
 
-```
+```shell
 sudo pip install virtualenv virtualenvwrapper
 nano ~/.bashrc
 
@@ -74,13 +74,13 @@ Create new virtual environment for your website: `mkvirtualenv projectname`. To 
 
 #### Clone git repo
 
-```
+```shell
 # setup SSH key and add this server public key to github/bitbucket
 ssh-keygen -t rsa
 cat ~/.ssh/id_rsa.pub
 ```
 
-```
+```shell
 # clone your project to your user directory
 git clone git@github.com:username/projectname.git
 cd ~/projectname
@@ -113,7 +113,7 @@ Test django project in work. Run `./manage.py runserver 0.0.0.0:8000` and open y
 
 Run website to be served via gunicorn:
 
-```
+```shell
 cd ~/myproject
 gunicorn --bind 0.0.0.0:8000 myproject.wsgi:application
 ```
