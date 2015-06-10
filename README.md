@@ -52,6 +52,8 @@ mysql -u root -p
 # > \q
 ```
 
+You can restore your database from dump if you migrate data from old server.
+
 #### Use virtualenv
 
 This allow you to work with multiple projects on a single server. You can install different versions of django or other python packages on the same server. For example, project1 can work on django 1.6 and project2 can work on django 1.8.
