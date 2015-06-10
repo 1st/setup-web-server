@@ -12,9 +12,7 @@ On local Linux/Mac:
 
 On server (Ubuntu):
  * add your SSH key to your server `.ssh/known_hosts` (that you copied before)
- * disconnect from server and test ssh connection `ssh username@ip-address` (should not ask for password)
-
-Instell dependencies:
+ * disconnect from server and try connect again `ssh username@ip-address` (should not ask for password)
  * `sudo apt-get update && sudo apt-get upgrade`
  * `sudo apt-get install python-pip python-dev nginx git memcached`
 
