@@ -1,6 +1,6 @@
 # How to setup new Ubuntu web server
 
-This manual provide information about how to setup Ubuntu server to work as web server. I personally use Python language to bild my applications with Django framework. But you can find useful informaton for your use case, for example - you learn how to setup Postfix to send emails from your server to real users.
+This manual provide information about how to setup Ubuntu server to work as web server. I personally use **Python** language to bild my applications with **Django framework**. But you can find useful informaton for your use case, for example - you learn how to setup **Postfix to send emails** from your server to real users.
 
 
 ### Prepare server to work
