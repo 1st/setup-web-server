@@ -18,8 +18,8 @@ On server (Ubuntu):
 
 #### Install database
 
+**Postgres**
 ```shell
-# Postgres
 sudo apt-get install postgresql postgresql-contrib libpq-dev
 
 # create database for your website
@@ -35,8 +35,8 @@ psql
 exit
 ```
 
+**MySQL**
 ```shell
-# MySQL
 sudo apt-get install mysql-server libmysqlclient-dev
 sudo mysql_install_db && sudo mysql_secure_installation
 
@@ -48,6 +48,9 @@ mysql -u root -p
 # > GRANT ALL PRIVILEGES ON myproject.* TO myprojectuser@localhost;
 # > FLUSH PRIVILEGES;
 # > \q
+
+# fix problem with timezone like this "Database returned an invalid value in QuerySet.dates()"
+mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -p mysql
 ```
 
 You can restore your database from dump if you migrate data from old server.
