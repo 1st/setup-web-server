@@ -142,11 +142,16 @@ Start gunicorn `sudo service gunicorn start`.
 
 #### Configure Nginx to Proxy Pass to Gunicorn
 
+
+Edit file `` and add this line
+
 Paste content to this file `sudo nano /etc/nginx/sites-available/projectname`:
 ```
 server {
     listen 80;
     server_name server_domain_or_IP;
+    # limit on upload file (up to 10 MB)
+    client_max_body_size 10M;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
