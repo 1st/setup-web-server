@@ -15,7 +15,7 @@ On server (Ubuntu):
  * disconnect from server and try connect again `ssh username@ip-address` (should not ask for password)
  * `sudo apt-get update && sudo apt-get upgrade`
  * `sudo apt-get install python-pip python-dev nginx git memcached`
- * `sudo apt-get install libjpeg-dev` - to work with images [see other formats](http://pillow.readthedocs.org/en/latest/installation.html#external-libraries)
+ * `sudo apt-get install libjpeg-dev` - to work with images. [See other formats](http://pillow.readthedocs.org/en/latest/installation.html#external-libraries)
 
 #### Install database
 
