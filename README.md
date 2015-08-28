@@ -76,6 +76,15 @@ source ~/.bashrc
 
 Create new virtual environment for your website: `mkvirtualenv projectname`. To switch virtualenv to your project - type `workon projectname`.
 
+To create virtual environment with `python3` support you need to specify path to specific version of python.
+
+```shell
+# get path to pyhon3 and use it below
+$ which python3
+/usr/local/bin/python3
+$ mkvirtualenv -p /usr/local/bin/python3 projectname
+```
+
 #### Clone git repo
 
 ```shell
