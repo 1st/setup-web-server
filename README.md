@@ -152,9 +152,6 @@ Start gunicorn `sudo service gunicorn start`.
 
 #### Configure Nginx to Proxy Pass to Gunicorn
 
-
-Edit file `` and add this line
-
 Paste content to this file `sudo nano /etc/nginx/sites-available/projectname`:
 ```
 server {
