@@ -85,6 +85,11 @@ $ which python3
 $ mkvirtualenv -p /usr/local/bin/python3 projectname
 ```
 
+```shell
+# or this shortcut
+mkvirtualenv projectname --python=$(which python3)
+```
+
 #### Clone git repo
 
 ```shell
