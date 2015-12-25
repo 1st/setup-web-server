@@ -37,7 +37,7 @@ def deploy():
     """
     Deploy project to server and reload nginx.
 
-    Source code update from a git repository.
+    Source code updates from a git repository.
 
     TODO: apply DB migrations.
     """
