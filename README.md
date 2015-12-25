@@ -2,6 +2,8 @@
 
 This manual provide information about how to setup Ubuntu server to work as web server. I personally use **Python** language to bild my applications with **Django framework**. But you can find useful informaton for your use case, for example - you learn how to setup **Postfix to send emails** from your server to real users.
 
+> **NOTE.** You can use a script [fabfile.py](fabfile.py) that allows you to run command `fab setup_server` to install all required packages on your new Ubuntu server. *This script is under development.*
+
 
 ### Prepare server to work
 
