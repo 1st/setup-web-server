@@ -1,12 +1,17 @@
 """
-Prepare Django project and upload it to server.
+This script used to setup new webserver and deploy code.
 
-Also this script allows to prepare new Ubuntu server with
-list of required packages: install python3, mysql or postgres,
-create virtualenv and configure nginx webserver.
+I use Python + Django + Nginx + Postgres. But you can change
+configuration to use MySQL and other packages as you wish.
 
-I use Fabric to execute commands on the server.
-I clone git repository on server and update this repo.
+Before you start, you need to install Fabric with:
+    `pip install fabric`
+
+How it works:
+- `fab init_server` - prepare new Ubuntu server to be a webserver.
+  Uses list of pakages from ubuntu_packages.
+- `fab deploy` - deploy new version of Django project to server.
+  By the way it copy static files, migrate DB, restart webserver.
 """
 from fabric.api import run, local, hosts, cd, prefix, env
 from fabric.contrib import django
@@ -20,6 +25,12 @@ env.hosts = ['mydomain.com']
 # project settings
 project_name = 'myproject'
 project_root_dir = '/home/{}/{}'.format(username, project_name)
+# list of packages to install on Ubuntu server
+ubuntu_packages = (
+    'postgresql',
+    'python3',
+    'nginx',
+)
 
 
 def deploy():
