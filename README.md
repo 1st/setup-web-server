@@ -206,6 +206,9 @@ Edit lines (use your hostname): `sudo nano /etc/postfix/main.cf`
 ```
 myhostname = mywebsite.com
 virtual_alias_maps = hash:/etc/postfix/virtual
+# Uncomment these lines:
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
 ```
 
 Add mapping for emails that you want to redirect: `sudo nano /etc/postfix/virtual`
@@ -230,6 +233,7 @@ Compile emails database AND restart postfix:
 
 ```shell
 sudo postmap /etc/postfix/virtual
+sudo service postfix reload
 sudo service postfix restart
 ```
 
