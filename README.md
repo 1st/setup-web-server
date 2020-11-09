@@ -232,6 +232,7 @@ office:        office@gmail.com
 Compile emails database AND restart postfix:
 
 ```shell
+sudo newaliases
 sudo postmap /etc/postfix/virtual
 sudo service postfix reload
 sudo service postfix restart
